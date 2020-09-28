@@ -7,7 +7,7 @@ def get_word():
     return choice(words_lib.word_list).upper()
 
 
-def print_hangman(tries):
+def display_hangman(tries):
     figure = [
         r"""
                    --------
@@ -87,7 +87,7 @@ def play_again():
 def main():
 
     # Initial
-    tries = 7
+    tries = 6   # 7 tries in total
     print("\nHANGMAN")
     guessed = False
 
@@ -97,10 +97,10 @@ def main():
     guessed_char = []
 
     # run for all the 7 tries (game loop)
-    while not guessed:
+    while not guessed and tries > 0:
 
         # initail prints
-        print(print_hangman(tries-1))
+        print(display_hangman(tries))
         print(blanks)
         guess = input('Input the guessed letter: ').upper()
 
@@ -115,6 +115,8 @@ def main():
             elif guess not in answer:
                 print("WRONG GUESS!!")
                 tries -= 1
+                if tries == 0:
+                    print("YOU LOST!!")
                 guessed_char.append(guess)
 
             # in case of write guess
